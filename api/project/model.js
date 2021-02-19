@@ -2,11 +2,23 @@
 const db = require("../../data/dbConfig");
 
 function getProjects() {
-    return db("projects");
+    return db("projects").then((project) => {
+        const projectBool = project.map((prj) => {
+            prj.project_completed = !!prj.project_completed;
+            return prj;
+        });
+        return projectBool;
+    });
 }
 
 function getProjectById(projectId) {
-    return db("projects").where("project_id", projectId).first();
+    return db("projects")
+        .where("project_id", projectId)
+        .first()
+        .then((prj) => {
+            prj.project_completed = !!prj.project_completed;
+            return prj;
+        });
 }
 
 function addProject(project) {

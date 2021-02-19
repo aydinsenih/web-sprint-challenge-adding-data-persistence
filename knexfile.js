@@ -12,7 +12,9 @@ const sharedConfig = {
 module.exports = {
     development: {
         ...sharedConfig,
-        connection: { filename: "./data/lambda.db3" },
+        connection: {
+            filename: "./data/lambda.db3",
+        },
     },
     testing: {
         ...sharedConfig,

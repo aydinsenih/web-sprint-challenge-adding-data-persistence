@@ -11,7 +11,14 @@ function getTasks() {
             "t.task_completed",
             "p.project_name",
             "p.project_description"
-        );
+        )
+        .then((tasks) => {
+            const tasksBool = tasks.map((task) => {
+                task.task_completed = !!task.task_completed;
+                return task;
+            });
+            return tasksBool;
+        });
 }
 
 function getTaskById(taskid) {
@@ -26,10 +33,15 @@ function getTaskById(taskid) {
             "p.project_description"
         )
         .where("task_id", taskid)
-        .first();
+        .first()
+        .then((task) => {
+            task.task_completed = !!task.task_completed;
+            return task;
+        });
 }
 
 function addTask(task) {
+    console.log(task);
     return db("tasks")
         .insert(task)
         .then((ids) => {

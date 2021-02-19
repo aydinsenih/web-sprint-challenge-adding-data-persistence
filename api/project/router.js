@@ -3,6 +3,8 @@ const express = require("express");
 
 const Projects = require("./model");
 
+const mw = require("./middleware");
+
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -14,11 +16,9 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", mw.validateProjectID, async (req, res) => {
     try {
-        const id = req.params.id;
-        const project = await Projects.getProjectById(id);
-        res.status(200).json(project);
+        res.status(200).json(req.project);
     } catch (error) {
         res.status(500).json({ error: error });
     }

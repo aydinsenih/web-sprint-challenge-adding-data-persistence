@@ -17,8 +17,8 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const id = req.params.id;
-        const projects = await Projects.getProjectById(id);
-        res.status(200).json(projects);
+        const project = await Projects.getProjectById(id);
+        res.status(200).json(project);
     } catch (error) {
         res.status(500).json({ error: error });
     }
@@ -27,7 +27,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         const newProject = req.body;
-        const addedProject = await Projects.addedProject(newProject);
+        const addedProject = await Projects.addProject(newProject);
         res.status(201).json(addedProject);
     } catch (error) {
         res.status(500).json({ error: error });

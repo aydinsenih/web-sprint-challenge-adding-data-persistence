@@ -9,7 +9,7 @@ exports.seed = function (knex) {
                     resource_name: "Gembucket",
                 },
                 {
-                    resource_name: "Gembucket",
+                    resource_name: "Computer",
                 },
                 {
                     resource_name: "Viva",
